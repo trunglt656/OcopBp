@@ -1,25 +1,18 @@
+require('dotenv').config();
 const express = require('express');
-const path = require('path');
 const app = express();
 const hostname= 'localhost';
-require('dotenv').config();
+const configViewEngine = require('./config/viewEngine');
+const webRouter = require('./routes/web');
 
 port = process.env.PORT || 3000;
 
-//set config template engine
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');
+// config plate engine
+configViewEngine(app);
 
-app.use(express.static(path.join(__dirname, 'public')));
+// use router
+app.use('/', webRouter);
 
-app.get('/', (req, res) => {
-  res.send('Hello World!'); 
-});
-
-
-app.get('/api', (req, res) => {
-  res.render('sample.ejs');
-});
 
 app.listen(port, hostname, () => {
   console.log(`Server is running on port ${port}`);
