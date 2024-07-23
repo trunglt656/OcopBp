@@ -1,19 +1,25 @@
 require('dotenv').config();
 const express = require('express');
 const app = express();
-const hostname= 'localhost';
+const hostname = 'localhost';
 const configViewEngine = require('./config/viewEngine');
 const webRouter = require('./routes/web');
+const connection = require('./config/database');
 
-port = process.env.PORT || 3000;
 
-// config plate engine
+const port = process.env.PORT || 3000;
+
+// Config view engine
 configViewEngine(app);
 
-// use router
+// Use router
 app.use('/', webRouter);
 
 
+
+
+
+// Start the server and test the database connection
 app.listen(port, hostname, () => {
-  console.log(`Server is running on port ${port}`);
+  console.log(`Server is running at http://${hostname}:${port}/`);
 });

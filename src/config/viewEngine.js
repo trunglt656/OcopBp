@@ -1,3 +1,4 @@
+// set up engine template ejs (cấu hình các file tĩnh, tạo các trang html động )
 const path = require('path');
 const express = require('express');
 
